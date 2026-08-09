@@ -1019,6 +1019,7 @@ document
 /* SETUP NAVIGATION */
 
 function nextSetup() {
+
 const screens = [
 "welcome",
 "language",
@@ -1026,6 +1027,33 @@ const screens = [
 "level",
 "tutor"
 ];
+
+const current =
+document
+.querySelector(".screen.active")
+.id;
+
+const index =
+screens.indexOf(current);
+
+if (index === -1) {
+console.error("Current screen not found:", current);
+return;
+}
+
+if (index < screens.length - 1) {
+
+showScreen(
+screens[index + 1]
+);
+
+} else {
+
+createAdventure();
+
+}
+
+}
 
 
 const current =
