@@ -46,7 +46,6 @@ padding: 18px 16px 40px;
 display: flex;
 justify-content: space-between;
 align-items: center;
-
 margin-bottom: 18px;
 }
 
@@ -83,7 +82,7 @@ linear-gradient(
 #9b70ff
 );
 
-padding: 24px;
+padding: 25px;
 
 border-radius: 24px;
 
@@ -108,6 +107,65 @@ border-radius: 20px;
 padding: 18px;
 
 margin-bottom: 14px;
+}
+
+.card h2 {
+margin-bottom: 12px;
+}
+
+.choice-grid {
+display: grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap: 10px;
+}
+
+.choice {
+background: #27334a;
+
+padding: 16px;
+
+border-radius: 16px;
+
+border: 2px solid transparent;
+
+cursor: pointer;
+
+font-weight: 650;
+}
+
+.choice.selected {
+border-color: #8c73ff;
+
+background: #352d63;
+}
+
+button {
+width: 100%;
+
+border: none;
+
+border-radius: 15px;
+
+padding: 15px;
+
+font-size: 16px;
+
+font-weight: 700;
+
+cursor: pointer;
+
+margin-top: 12px;
+
+background: #7c5cff;
+
+color: white;
+}
+
+button.secondary {
+background: #29344b;
 }
 
 .mission {
@@ -138,36 +196,8 @@ color: #aeb8cc;
 line-height: 1.5;
 }
 
-button {
-width: 100%;
-
-border: none;
-
-border-radius: 15px;
-
-padding: 15px;
-
-font-size: 16px;
-
-font-weight: 700;
-
-cursor: pointer;
-
-margin-top: 12px;
-
-background: #7c5cff;
-
-color: white;
-}
-
-button.secondary {
-background: #29344b;
-}
-
-button.gold {
-background: #ffc857;
-
-color: #16120a;
+.locked {
+opacity: .4;
 }
 
 .chat {
@@ -300,10 +330,6 @@ font-size: 60px;
 margin-bottom: 10px;
 }
 
-.locked {
-opacity: .4;
-}
-
 .footer {
 text-align: center;
 
@@ -350,27 +376,327 @@ margin-top: 25px;
 </div>
 
 
-<!-- HOME SCREEN -->
+<!-- STEP 1 -->
 
 <section
-id="home"
+id="welcome"
 class="screen active"
 >
 
 <div class="hero">
 
 <h1>
-Welcome, Adventurer!
+🌎 Welcome to Lingua Quest
 </h1>
 
 <p>
 
-Learn Spanish by living it.
+Don't study a language.
 
-Complete real-world missions,
-meet characters,
-and build your confidence
-through conversation.
+<strong>Live it.</strong>
+
+Your adventure begins with
+real conversations, real situations,
+and a little courage.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>
+What language do you want to learn?
+</h2>
+
+<div
+class="choice-grid"
+id="languageChoices"
+>
+
+<div
+class="choice selected"
+onclick="chooseLanguage(this,'Spanish')"
+>
+🇪🇸 Spanish
+</div>
+
+<div
+class="choice"
+onclick="chooseLanguage(this,'French')"
+>
+🇫🇷 French
+</div>
+
+<div
+class="choice"
+onclick="chooseLanguage(this,'Italian')"
+>
+🇮🇹 Italian
+</div>
+
+<div
+class="choice"
+onclick="chooseLanguage(this,'German')"
+>
+🇩🇪 German
+</div>
+
+</div>
+
+<button onclick="nextSetup()">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- STEP 2 -->
+
+<section
+id="goal"
+class="screen"
+>
+
+<div class="hero">
+
+<h1>
+🎯 What's your mission?
+</h1>
+
+<p>
+Tell us why you want to learn.
+We'll use it to shape your adventure.
+</p>
+
+</div>
+
+<div class="card">
+
+<div
+class="choice selected"
+onclick="chooseGoal(this,'Travel')"
+>
+✈️ Travel
+</div>
+
+<div
+class="choice"
+onclick="chooseGoal(this,'Work')"
+>
+💼 Work
+</div>
+
+<div
+class="choice"
+onclick="chooseGoal(this,'Moving abroad')"
+>
+🏠 Moving abroad
+</div>
+
+<div
+class="choice"
+onclick="chooseGoal(this,'Relationships')"
+>
+❤️ Relationships & social life
+</div>
+
+<div
+class="choice"
+onclick="chooseGoal(this,'Everyday conversation')"
+>
+🗣️ Everyday conversation
+</div>
+
+<div
+class="choice"
+onclick="chooseGoal(this,'Personal interest')"
+>
+🎓 Personal interest
+</div>
+
+<button onclick="nextSetup()">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- STEP 3 -->
+
+<section
+id="level"
+class="screen"
+>
+
+<div class="hero">
+
+<h1>
+🌱 Where are you starting?
+</h1>
+
+<p>
+No judgment. Everyone starts somewhere.
+</p>
+
+</div>
+
+<div class="card">
+
+<div
+class="choice selected"
+onclick="chooseLevel(this,'Beginner')"
+>
+🌱 Beginner
+<br>
+<small>I know a few words or almost nothing.</small>
+</div>
+
+<div
+class="choice"
+onclick="chooseLevel(this,'Intermediate')"
+>
+🌿 Intermediate
+<br>
+<small>I can have basic conversations.</small>
+</div>
+
+<div
+class="choice"
+onclick="chooseLevel(this,'Advanced')"
+>
+🔥 Advanced
+<br>
+<small>I can communicate comfortably.</small>
+</div>
+
+<button onclick="nextSetup()">
+
+Continue →
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- STEP 4 -->
+
+<section
+id="tutor"
+class="screen"
+>
+
+<div class="hero">
+
+<h1>
+🎭 Choose your guide
+</h1>
+
+<p>
+Your tutor will travel through the adventure with you.
+</p>
+
+</div>
+
+<div class="card">
+
+<div
+class="choice selected"
+onclick="chooseTutor(this,'Maya')"
+>
+
+🌎 <strong>Maya</strong>
+
+<br>
+
+<small>
+Warm, encouraging & adventurous
+</small>
+
+</div>
+
+<div
+class="choice"
+onclick="chooseTutor(this,'Alex')"
+>
+
+😏 <strong>Alex</strong>
+
+<br>
+
+<small>
+Funny, playful & confident
+</small>
+
+</div>
+
+<div
+class="choice"
+onclick="chooseTutor(this,'Sofia')"
+>
+
+📚 <strong>Sofia</strong>
+
+<br>
+
+<small>
+Patient, thoughtful & supportive
+</small>
+
+</div>
+
+<div
+class="choice"
+onclick="chooseTutor(this,'Leo')"
+>
+
+🔥 <strong>Leo</strong>
+
+<br>
+
+<small>
+Energetic, challenging & motivating
+</small>
+
+</div>
+
+<button onclick="createAdventure()">
+
+Create My Adventure →
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ADVENTURE MAP -->
+
+<section
+id="home"
+class="screen"
+>
+
+<div class="hero">
+
+<h1>
+Welcome, <span id="playerName">Adventurer</span>!
+</h1>
+
+<p id="adventureDescription">
+
+Your adventure begins now.
 
 </p>
 
@@ -380,11 +706,11 @@ through conversation.
 <div class="card">
 
 <h2>
-🗺️ Madrid Adventure
+🗺️ Your Adventure
 </h2>
 
-<p>
-Spanish • Beginner
+<p id="profileSummary">
+
 </p>
 
 
@@ -453,13 +779,6 @@ Mission 3: Catch a Taxi
 
 </div>
 
-
-<div class="footer">
-
-Lingua Quest • Learn by living the language 🌎
-
-</div>
-
 </section>
 
 
@@ -478,12 +797,15 @@ class="screen"
 
 <p>
 
-🏨 <strong>Mission:
-Check Into the Hotel</strong>
+🏨 <strong>
+Mission: Check Into the Hotel
+</strong>
 
 </p>
 
-<p style="margin-top:8px;color:#aeb8cc">
+<p
+style="margin-top:8px;color:#aeb8cc"
+>
 
 You've just arrived after a long flight.
 
@@ -500,12 +822,10 @@ Walk into Hotel Sol and check in.
 id="messages"
 class="messages"
 >
-
 </div>
 
-
-<div id="feedback"></div>
-
+<div id="feedback">
+</div>
 
 <div class="input-row">
 
@@ -522,14 +842,12 @@ Send
 
 </div>
 
-
 <button
 class="secondary"
 onclick="giveHint()"
 >
 
-💡 Give me a hint
-(-5 🪙)
+💡 Give me a hint (-5 🪙)
 
 </button>
 
@@ -538,7 +856,7 @@ onclick="giveHint()"
 </section>
 
 
-<!-- COMPLETE SCREEN -->
+<!-- COMPLETE -->
 
 <section
 id="complete"
@@ -574,9 +892,7 @@ Hotel Sol.
 
 </p>
 
-<button
-onclick="goHome()"
->
+<button onclick="goHome()">
 
 Return to Adventure Map →
 
@@ -593,9 +909,18 @@ Return to Adventure Map →
 <script>
 
 
-/* -------------------------
-GAME STATE
-------------------------- */
+/* PROFILE */
+
+let language = "Spanish";
+
+let goal = "Travel";
+
+let level = "Beginner";
+
+let tutor = "Maya";
+
+
+/* GAME */
 
 let xp = 0;
 
@@ -606,16 +931,253 @@ let hearts = 3;
 let step = 0;
 
 
-/* -------------------------
-CONVERSATION
-------------------------- */
+/* LANGUAGE */
+
+function chooseLanguage(element,value) {
+
+language = value;
+
+document
+.querySelectorAll("#languageChoices .choice")
+.forEach(x =>
+x.classList.remove("selected")
+);
+
+element.classList.add("selected");
+
+}
+
+
+/* GOAL */
+
+function chooseGoal(element,value) {
+
+goal = value;
+
+document
+.querySelectorAll("#goal .choice")
+.forEach(x =>
+x.classList.remove("selected")
+);
+
+element.classList.add("selected");
+
+}
+
+
+/* LEVEL */
+
+function chooseLevel(element,value) {
+
+level = value;
+
+document
+.querySelectorAll("#level .choice")
+.forEach(x =>
+x.classList.remove("selected")
+);
+
+element.classList.add("selected");
+
+}
+
+
+/* TUTOR */
+
+function chooseTutor(element,value) {
+
+tutor = value;
+
+document
+.querySelectorAll("#tutor .choice")
+.forEach(x =>
+x.classList.remove("selected")
+);
+
+element.classList.add("selected");
+
+}
+
+
+/* SCREEN */
+
+function showScreen(id) {
+
+document
+.querySelectorAll(".screen")
+.forEach(screen =>
+screen.classList.remove("active")
+);
+
+document
+.getElementById(id)
+.classList.add("active");
+
+}
+
+
+/* SETUP NAVIGATION */
+
+function nextSetup() {
+
+const screens = [
+
+"welcome",
+"goal",
+"level",
+"tutor"
+
+];
+
+const current =
+document
+.querySelector(".screen.active")
+.id;
+
+const index =
+screens.indexOf(current);
+
+if(index < screens.length - 1) {
+
+showScreen(
+screens[index + 1]
+);
+
+}
+
+}
+
+
+/* CREATE ADVENTURE */
+
+function createAdventure() {
+
+document
+.getElementById("adventureDescription")
+.textContent =
+
+"You're learning " +
+language +
+" for " +
+goal.toLowerCase() +
+". " +
+tutor +
+" will be your guide.";
+
+document
+.getElementById("profileSummary")
+.textContent =
+
+language +
+" • " +
+level +
+" • " +
+goal +
+" • Guide: " +
+tutor;
+
+showScreen("home");
+
+}
+
+
+/* STATS */
+
+function updateStats() {
+
+document
+.getElementById("xp")
+.textContent = xp;
+
+document
+.getElementById("coins")
+.textContent = coins;
+
+document
+.getElementById("hearts")
+.textContent = hearts;
+
+}
+
+
+/* START MISSION */
+
+function startMission() {
+
+step = 0;
+
+document
+.getElementById("messages")
+.innerHTML = "";
+
+document
+.getElementById("feedback")
+.innerHTML = "";
+
+showScreen("mission");
+
+addAIMessage(
+"¡Hola! Bienvenida al Hotel Sol. ¿Tiene una reserva?"
+);
+
+document
+.getElementById("answer")
+.focus();
+
+}
+
+
+/* AI MESSAGE */
+
+function addAIMessage(text) {
+
+const message =
+document.createElement("div");
+
+message.className =
+"message ai";
+
+message.innerHTML =
+
+'<div class="name">🌎 ' +
+tutor +
+'</div>' +
+text;
+
+document
+.getElementById("messages")
+.appendChild(message);
+
+}
+
+
+/* PLAYER */
+
+function addPlayerMessage(text) {
+
+const message =
+document.createElement("div");
+
+message.className =
+"message player";
+
+message.innerHTML =
+
+'<div class="name">You</div>' +
+text;
+
+document
+.getElementById("messages")
+.appendChild(message);
+
+}
+
+
+/* CONVERSATION */
 
 const conversation = [
 
 {
-
-text:
-"¡Hola! Bienvenida al Hotel Sol. ¿Tiene una reserva?",
 
 keywords:
 [
@@ -636,9 +1198,6 @@ next:
 
 {
 
-text:
-"¡Perfecto! ¿A nombre de quién?",
-
 keywords:
 [
 "rebecca",
@@ -657,9 +1216,6 @@ next:
 
 {
 
-text:
-"Gracias, Rebecca. Aquí está su llave. ¿Necesita algo más?",
-
 keywords:
 [
 "breakfast",
@@ -674,132 +1230,13 @@ feedback:
 
 next:
 "¡Excelente! Disfrute su estancia."
+
 }
 
 ];
 
 
-/* -------------------------
-UPDATE STATS
-------------------------- */
-
-function updateStats() {
-
-document.getElementById("xp")
-.textContent = xp;
-
-document.getElementById("coins")
-.textContent = coins;
-
-document.getElementById("hearts")
-.textContent = hearts;
-
-}
-
-
-/* -------------------------
-CHANGE SCREEN
-------------------------- */
-
-function showScreen(id) {
-
-document
-.querySelectorAll(".screen")
-.forEach(screen => {
-
-screen.classList.remove("active");
-
-});
-
-document
-.getElementById(id)
-.classList.add("active");
-
-}
-
-
-/* -------------------------
-START MISSION
-------------------------- */
-
-function startMission() {
-
-step = 0;
-
-document
-.getElementById("messages")
-.innerHTML = "";
-
-document
-.getElementById("feedback")
-.innerHTML = "";
-
-showScreen("mission");
-
-addAIMessage(
-conversation[0].text
-);
-
-document
-.getElementById("answer")
-.focus();
-
-}
-
-
-/* -------------------------
-AI MESSAGE
-------------------------- */
-
-function addAIMessage(text) {
-
-const message =
-document.createElement("div");
-
-message.className =
-"message ai";
-
-message.innerHTML =
-
-'<div class="name">🌎 Maya</div>' +
-
-text;
-
-document
-.getElementById("messages")
-.appendChild(message);
-
-}
-
-
-/* -------------------------
-PLAYER MESSAGE
-------------------------- */
-
-function addPlayerMessage(text) {
-
-const message =
-document.createElement("div");
-
-message.className =
-"message player";
-
-message.innerHTML =
-
-'<div class="name">You</div>' +
-
-text;
-
-document
-.getElementById("messages")
-.appendChild(message);
-
-}
-
-
-/* -------------------------
-SEND ANSWER
-------------------------- */
+/* SEND */
 
 function sendAnswer() {
 
@@ -809,19 +1246,17 @@ document.getElementById("answer");
 const text =
 input.value.trim();
 
-if (!text) return;
+if(!text) return;
 
 addPlayerMessage(text);
 
 input.value = "";
-
 
 const current =
 conversation[step];
 
 const lower =
 text.toLowerCase();
-
 
 const correct =
 current.keywords.some(
@@ -830,7 +1265,7 @@ lower.includes(keyword)
 );
 
 
-if (correct) {
+if(correct) {
 
 xp += 20;
 
@@ -855,8 +1290,7 @@ setTimeout(() => {
 
 step++;
 
-
-if (
+if(
 step <
 conversation.length
 ) {
@@ -866,7 +1300,7 @@ document
 .innerHTML = "";
 
 addAIMessage(
-conversation[step].text
+conversation[step].next
 );
 
 }
@@ -877,7 +1311,7 @@ completeMission();
 
 }
 
-}, 900);
+},900);
 
 }
 
@@ -887,14 +1321,15 @@ hearts--;
 
 xp += 5;
 
-
 document
 .getElementById("feedback")
 .innerHTML =
 
 '<div class="hint">' +
 
-"💡 You're close! Try answering naturally. " +
+"💡 You're close! " +
+
+"Try answering naturally. " +
 
 "Don't worry about being perfect. " +
 
@@ -902,40 +1337,24 @@ document
 
 "</div>";
 
-
-if (hearts <= 0) {
+if(hearts <= 0) {
 
 hearts = 3;
 
-document
-.getElementById("feedback")
-.innerHTML +=
-
-'<div class="feedback">' +
-
-"❤️ Your hearts are refilled. " +
-
-"Mistakes are part of learning!" +
-
-"</div>";
-
 }
 
 }
-
 
 updateStats();
 
 }
 
 
-/* -------------------------
-HINT
-------------------------- */
+/* HINT */
 
 function giveHint() {
 
-if (coins < 5) {
+if(coins < 5) {
 
 alert(
 "You need 5 coins for a hint."
@@ -947,17 +1366,15 @@ return;
 
 coins -= 5;
 
-
 const hints = [
 
 'Try: "Yes, I have a reservation."',
 
 'Tell Maya the name on the reservation.',
 
-'You can ask about breakfast, the elevator, or simply say no thanks.'
+'Ask about breakfast, the elevator, or say no thanks.'
 
 ];
-
 
 document
 .getElementById("feedback")
@@ -971,15 +1388,12 @@ hints[step] +
 
 "</div>";
 
-
 updateStats();
 
 }
 
 
-/* -------------------------
-MISSION COMPLETE
-------------------------- */
+/* COMPLETE */
 
 function completeMission() {
 
@@ -994,9 +1408,7 @@ showScreen("complete");
 }
 
 
-/* -------------------------
-RETURN HOME
-------------------------- */
+/* HOME */
 
 function goHome() {
 
