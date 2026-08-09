@@ -1238,118 +1238,128 @@ next:
 
 /* SEND */
 
-function sendAnswer() {
+async function sendAnswer() {
 
-const input =
-document.getElementById("answer");
+  const input = document.getElementById("answer");
+  const text = input.value.trim();
 
-const text =
-input.value.trim();
+  if (!text) return;
 
-if(!text) return;
+  addPlayerMessage(text);
+  input.value = "";
 
-addPlayerMessage(text);
+  const feedback = document.getElementById("feedback");
 
-input.value = "";
+  feedback.innerHTML =
+    '<div class="hint">🤖 Maya is thinking...</div>';
 
-const current =
-conversation[step];
+  try {
 
-const lower =
-text.toLowerCase();
+    const response = await fetch("/api/chat", {
 
-const correct =
-current.keywords.some(
-keyword =>
-lower.includes(keyword)
-);
+      method: "POST",
 
+      headers: {
+        "Content-Type": "application/json"
+      },
 
-if(correct) {
+      body: JSON.stringify({
 
-xp += 20;
+        message: text,
 
-coins += 5;
+        language: language,
 
-document
-.getElementById("feedback")
-.innerHTML =
+        level: level,
 
-'<div class="feedback">' +
+        tutor: tutor,
 
-"⭐ <strong>+20 XP</strong><br><br>" +
+        mission: "Hotel Check-In"
 
-"✓ Great communication!<br>" +
+      })
 
-current.feedback +
+    });
 
-"</div>";
+    const data = await response.json();
 
+    if (!response.ok) {
+      throw new Error(data.error || "AI request failed");
+    }
 
-setTimeout(() => {
+    addAIMessage(data.reply);
 
-step++;
+    xp += Number(data.xp) || 10;
 
-if(
-step <
-conversation.length
-) {
+    if (data.vocabulary &&
+        data.vocabulary.length > 0) {
 
-document
-.getElementById("feedback")
-.innerHTML = "";
+      feedback.innerHTML =
 
-addAIMessage(
-conversation[step].next
-);
+        '<div class="feedback">' +
+
+        "⭐ <strong>+" +
+        (Number(data.xp) || 10) +
+        " XP</strong><br><br>" +
+
+        "🧠 Vocabulary: " +
+        data.vocabulary.join(", ") +
+
+        "</div>";
+
+    } else if (data.correction) {
+
+      feedback.innerHTML =
+
+        '<div class="feedback">' +
+
+        "⭐ <strong>+" +
+        (Number(data.xp) || 10) +
+        " XP</strong><br><br>" +
+
+        "💬 <strong>Correction:</strong><br>" +
+
+        data.correction +
+
+        "<br><br>" +
+
+        data.explanation +
+
+        "</div>";
+
+    } else {
+
+      feedback.innerHTML =
+
+        '<div class="feedback">' +
+
+        "⭐ <strong>+" +
+        (Number(data.xp) || 10) +
+        " XP</strong><br><br>" +
+
+        "Great job keeping the conversation going! 🌎" +
+
+        "</div>";
+
+    }
+
+    updateStats();
+
+  } catch (error) {
+
+    console.error(error);
+
+    feedback.innerHTML =
+
+      '<div class="hint">' +
+
+      "⚠️ Maya couldn't connect right now. " +
+
+      "Please try again." +
+
+      "</div>";
+
+  }
 
 }
-
-else {
-
-completeMission();
-
-}
-
-},900);
-
-}
-
-else {
-
-hearts--;
-
-xp += 5;
-
-document
-.getElementById("feedback")
-.innerHTML =
-
-'<div class="hint">' +
-
-"💡 You're close! " +
-
-"Try answering naturally. " +
-
-"Don't worry about being perfect. " +
-
-"<strong>+5 XP for trying.</strong>" +
-
-"</div>";
-
-if(hearts <= 0) {
-
-hearts = 3;
-
-}
-
-}
-
-updateStats();
-
-}
-
-
 /* HINT */
 
 function giveHint() {
