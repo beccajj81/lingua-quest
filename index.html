@@ -1,262 +1,1012 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Lingua Quest</title>
+<meta charset="UTF-8">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #101522;
-      color: white;
-      min-height: 100vh;
-    }
+<title>Lingua Quest</title>
 
-    .app {
-      max-width: 520px;
-      margin: auto;
-      padding: 20px 16px 40px;
-    }
+<style>
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
 
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-    }
+body {
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+sans-serif;
 
-    .stats {
-      display: flex;
-      gap: 7px;
-    }
+background:
+linear-gradient(
+145deg,
+#0d1220,
+#19243b
+);
 
-    .stat {
-      background: #1c2537;
-      padding: 8px 10px;
-      border-radius: 20px;
-      font-size: 13px;
-    }
+color: white;
 
-    .hero {
-      background: linear-gradient(135deg, #6747e8, #9a70ff);
-      padding: 25px;
-      border-radius: 24px;
-      margin-bottom: 18px;
-    }
+min-height: 100vh;
+}
 
-    .hero h1 {
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
+.app {
+max-width: 520px;
+margin: auto;
+padding: 18px 16px 40px;
+}
 
-    .hero p {
-      color: #eeeeff;
-      line-height: 1.5;
-    }
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
 
-    .card {
-      background: #1b2335;
-      border-radius: 20px;
-      padding: 18px;
-      margin-bottom: 14px;
-    }
+margin-bottom: 18px;
+}
 
-    .card h2 {
-      margin-bottom: 8px;
-    }
+.logo {
+font-size: 21px;
+font-weight: 800;
+}
 
-    .mission {
-      background: #232d43;
-      border-radius: 18px;
-      padding: 18px;
-      margin-top: 12px;
-    }
+.stats {
+display: flex;
+gap: 6px;
+}
 
-    .mission-icon {
-      font-size: 36px;
-      margin-bottom: 8px;
-    }
+.stat {
+background: #1d2638;
+padding: 7px 9px;
+border-radius: 20px;
+font-size: 12px;
+}
 
-    .mission h3 {
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
+.screen {
+display: none;
+}
 
-    .mission p {
-      color: #aeb8cc;
-      line-height: 1.4;
-    }
+.screen.active {
+display: block;
+}
 
-    .reward {
-      margin-top: 12px;
-      font-size: 14px;
-    }
+.hero {
+background:
+linear-gradient(
+135deg,
+#6547e8,
+#9b70ff
+);
 
-    button {
-      width: 100%;
-      border: none;
-      border-radius: 15px;
-      padding: 15px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 14px;
-      background: #7c5cff;
-      color: white;
-    }
+padding: 24px;
 
-    button:active {
-      transform: scale(.98);
-    }
+border-radius: 24px;
 
-    .locked {
-      opacity: .45;
-    }
+margin-bottom: 16px;
+}
 
-    .footer {
-      text-align: center;
-      color: #77839a;
-      font-size: 13px;
-      margin-top: 25px;
-    }
-  </style>
+.hero h1 {
+font-size: 30px;
+margin-bottom: 8px;
+}
+
+.hero p {
+line-height: 1.5;
+color: #eeeeff;
+}
+
+.card {
+background: #1b2335;
+
+border-radius: 20px;
+
+padding: 18px;
+
+margin-bottom: 14px;
+}
+
+.mission {
+background: #232d43;
+
+padding: 18px;
+
+border-radius: 18px;
+
+margin-top: 12px;
+}
+
+.icon {
+font-size: 38px;
+
+margin-bottom: 8px;
+}
+
+.mission h3 {
+font-size: 20px;
+
+margin-bottom: 6px;
+}
+
+.mission p {
+color: #aeb8cc;
+
+line-height: 1.5;
+}
+
+button {
+width: 100%;
+
+border: none;
+
+border-radius: 15px;
+
+padding: 15px;
+
+font-size: 16px;
+
+font-weight: 700;
+
+cursor: pointer;
+
+margin-top: 12px;
+
+background: #7c5cff;
+
+color: white;
+}
+
+button.secondary {
+background: #29344b;
+}
+
+button.gold {
+background: #ffc857;
+
+color: #16120a;
+}
+
+.chat {
+background: #1b2335;
+
+border-radius: 20px;
+
+padding: 15px;
+
+min-height: 450px;
+
+display: flex;
+
+flex-direction: column;
+}
+
+.messages {
+flex: 1;
+
+overflow-y: auto;
+
+margin-bottom: 10px;
+}
+
+.message {
+padding: 12px 14px;
+
+border-radius: 16px;
+
+margin: 9px 0;
+
+line-height: 1.45;
+
+max-width: 88%;
+}
+
+.ai {
+background: #29344b;
+}
+
+.player {
+background: #513bb2;
+
+margin-left: auto;
+}
+
+.name {
+font-size: 12px;
+
+font-weight: 700;
+
+margin-bottom: 4px;
+
+opacity: .7;
+}
+
+.input-row {
+display: flex;
+
+gap: 8px;
+}
+
+input {
+flex: 1;
+
+background: #0d1320;
+
+border: 1px solid #39445b;
+
+color: white;
+
+border-radius: 14px;
+
+padding: 14px;
+
+font-size: 16px;
+
+outline: none;
+}
+
+.input-row button {
+width: auto;
+
+margin-top: 0;
+
+padding: 12px 16px;
+}
+
+.feedback {
+background: #173b2a;
+
+border: 1px solid #2d9d61;
+
+border-radius: 14px;
+
+padding: 12px;
+
+margin: 10px 0;
+
+font-size: 14px;
+
+line-height: 1.5;
+}
+
+.hint {
+background: #3b321b;
+
+border: 1px solid #806b2b;
+
+border-radius: 14px;
+
+padding: 12px;
+
+margin: 10px 0;
+
+font-size: 14px;
+
+line-height: 1.5;
+}
+
+.complete {
+text-align: center;
+
+padding: 28px 15px;
+}
+
+.big {
+font-size: 60px;
+
+margin-bottom: 10px;
+}
+
+.locked {
+opacity: .4;
+}
+
+.footer {
+text-align: center;
+
+color: #77839a;
+
+font-size: 13px;
+
+margin-top: 25px;
+}
+
+</style>
+
 </head>
 
 <body>
 
-  <div class="app">
-
-    <div class="header">
-
-      <div class="logo">
-        🌎 Lingua Quest
-      </div>
-
-      <div class="stats">
-        <div class="stat">⭐ 0</div>
-        <div class="stat">🪙 50</div>
-        <div class="stat">❤️ 3</div>
-      </div>
-
-    </div>
+<div class="app">
 
 
-    <div class="hero">
+<!-- HEADER -->
 
-      <h1>Welcome, Adventurer!</h1>
+<div class="header">
 
-      <p>
-        Learn a language by living it.
-        Complete missions, meet characters,
-        and build your skills through real conversations.
-      </p>
+<div class="logo">
+🌎 Lingua Quest
+</div>
 
-    </div>
+<div class="stats">
 
+<div class="stat">
+⭐ <span id="xp">0</span>
+</div>
 
-    <div class="card">
+<div class="stat">
+🪙 <span id="coins">50</span>
+</div>
 
-      <h2>🗺️ Madrid Adventure</h2>
+<div class="stat">
+❤️ <span id="hearts">3</span>
+</div>
 
-      <p>
-        Spanish • Beginner
-      </p>
+</div>
 
-
-      <div class="mission">
-
-        <div class="mission-icon">
-          🏨
-        </div>
-
-        <h3>
-          Mission 1: Check Into the Hotel
-        </h3>
-
-        <p>
-          You've just arrived in Madrid.
-          Your first challenge is waiting at the Hotel Sol.
-        </p>
-
-        <div class="reward">
-          ⭐ +100 XP &nbsp; 🪙 +25 coins
-        </div>
-
-        <button onclick="startMission()">
-          Start Mission →
-        </button>
-
-      </div>
+</div>
 
 
-      <div class="mission locked">
+<!-- HOME SCREEN -->
 
-        <div class="mission-icon">
-          🍽️
-        </div>
+<section
+id="home"
+class="screen active"
+>
 
-        <h3>
-          Mission 2: Order Dinner
-        </h3>
+<div class="hero">
 
-        <p>
-          🔒 Complete Mission 1 to unlock
-        </p>
+<h1>
+Welcome, Adventurer!
+</h1>
 
-      </div>
+<p>
 
+Learn Spanish by living it.
 
-      <div class="mission locked">
+Complete real-world missions,
+meet characters,
+and build your confidence
+through conversation.
 
-        <div class="mission-icon">
-          🚕
-        </div>
+</p>
 
-        <h3>
-          Mission 3: Catch a Taxi
-        </h3>
-
-        <p>
-          🔒 Complete Mission 2 to unlock
-        </p>
-
-      </div>
-
-    </div>
+</div>
 
 
-    <div class="footer">
-      Lingua Quest • Learn by living the language 🌎
-    </div>
+<div class="card">
 
-  </div>
+<h2>
+🗺️ Madrid Adventure
+</h2>
+
+<p>
+Spanish • Beginner
+</p>
 
 
-  <script>
+<div class="mission">
 
-    function startMission() {
+<div class="icon">
+🏨
+</div>
 
-      alert(
-        "🏨 Mission 1 starting!\n\n" +
-        "Your AI tutor Maya will meet you at the hotel."
-      );
+<h3>
+Mission 1: Check Into the Hotel
+</h3>
 
-    }
+<p>
 
-  </script>
+You've just arrived in Madrid.
+
+Your first challenge is waiting
+at the Hotel Sol.
+
+</p>
+
+<button
+onclick="startMission()"
+>
+
+Start Mission →
+
+</button>
+
+</div>
+
+
+<div class="mission locked">
+
+<div class="icon">
+🍽️
+</div>
+
+<h3>
+Mission 2: Order Dinner
+</h3>
+
+<p>
+🔒 Complete Mission 1 to unlock
+</p>
+
+</div>
+
+
+<div class="mission locked">
+
+<div class="icon">
+🚕
+</div>
+
+<h3>
+Mission 3: Catch a Taxi
+</h3>
+
+<p>
+🔒 Complete Mission 2 to unlock
+</p>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+
+Lingua Quest • Learn by living the language 🌎
+
+</div>
+
+</section>
+
+
+<!-- HOTEL MISSION -->
+
+<section
+id="mission"
+class="screen"
+>
+
+<div class="card">
+
+<h2>
+🇪🇸 Madrid • Day 1
+</h2>
+
+<p>
+
+🏨 <strong>Mission:
+Check Into the Hotel</strong>
+
+</p>
+
+<p style="margin-top:8px;color:#aeb8cc">
+
+You've just arrived after a long flight.
+
+Walk into Hotel Sol and check in.
+
+</p>
+
+</div>
+
+
+<div class="chat">
+
+<div
+id="messages"
+class="messages"
+>
+
+</div>
+
+
+<div id="feedback"></div>
+
+
+<div class="input-row">
+
+<input
+id="answer"
+placeholder="Type what you'd naturally say..."
+>
+
+<button
+onclick="sendAnswer()"
+>
+Send
+</button>
+
+</div>
+
+
+<button
+class="secondary"
+onclick="giveHint()"
+>
+
+💡 Give me a hint
+(-5 🪙)
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- COMPLETE SCREEN -->
+
+<section
+id="complete"
+class="screen"
+>
+
+<div class="card complete">
+
+<div class="big">
+🎉
+</div>
+
+<h1>
+Mission Complete!
+</h1>
+
+<p style="margin-top:12px">
+
+You successfully checked into
+Hotel Sol.
+
+</p>
+
+<h2 style="margin-top:20px">
+
+⭐ +100 XP
+
+</h2>
+
+<p style="margin-top:8px">
+
+🪙 +25 coins
+
+</p>
+
+<button
+onclick="goHome()"
+>
+
+Return to Adventure Map →
+
+</button>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+<script>
+
+
+/* -------------------------
+GAME STATE
+------------------------- */
+
+let xp = 0;
+
+let coins = 50;
+
+let hearts = 3;
+
+let step = 0;
+
+
+/* -------------------------
+CONVERSATION
+------------------------- */
+
+const conversation = [
+
+{
+
+text:
+"¡Hola! Bienvenida al Hotel Sol. ¿Tiene una reserva?",
+
+keywords:
+[
+"yes",
+"reservation",
+"booking",
+"reserve",
+"have"
+],
+
+feedback:
+"Great! You communicated that you have a reservation.",
+
+next:
+"¡Perfecto! ¿A nombre de quién?"
+
+},
+
+{
+
+text:
+"¡Perfecto! ¿A nombre de quién?",
+
+keywords:
+[
+"rebecca",
+"name",
+"my name",
+"under"
+],
+
+feedback:
+"Nice! You gave the name on the reservation.",
+
+next:
+"Gracias, Rebecca. Aquí está su llave. ¿Necesita algo más?"
+
+},
+
+{
+
+text:
+"Gracias, Rebecca. Aquí está su llave. ¿Necesita algo más?",
+
+keywords:
+[
+"breakfast",
+"elevator",
+"where",
+"yes",
+"no"
+],
+
+feedback:
+"Excellent! You handled the final hotel question.",
+
+next:
+"¡Excelente! Disfrute su estancia."
+}
+
+];
+
+
+/* -------------------------
+UPDATE STATS
+------------------------- */
+
+function updateStats() {
+
+document.getElementById("xp")
+.textContent = xp;
+
+document.getElementById("coins")
+.textContent = coins;
+
+document.getElementById("hearts")
+.textContent = hearts;
+
+}
+
+
+/* -------------------------
+CHANGE SCREEN
+------------------------- */
+
+function showScreen(id) {
+
+document
+.querySelectorAll(".screen")
+.forEach(screen => {
+
+screen.classList.remove("active");
+
+});
+
+document
+.getElementById(id)
+.classList.add("active");
+
+}
+
+
+/* -------------------------
+START MISSION
+------------------------- */
+
+function startMission() {
+
+step = 0;
+
+document
+.getElementById("messages")
+.innerHTML = "";
+
+document
+.getElementById("feedback")
+.innerHTML = "";
+
+showScreen("mission");
+
+addAIMessage(
+conversation[0].text
+);
+
+document
+.getElementById("answer")
+.focus();
+
+}
+
+
+/* -------------------------
+AI MESSAGE
+------------------------- */
+
+function addAIMessage(text) {
+
+const message =
+document.createElement("div");
+
+message.className =
+"message ai";
+
+message.innerHTML =
+
+'<div class="name">🌎 Maya</div>' +
+
+text;
+
+document
+.getElementById("messages")
+.appendChild(message);
+
+}
+
+
+/* -------------------------
+PLAYER MESSAGE
+------------------------- */
+
+function addPlayerMessage(text) {
+
+const message =
+document.createElement("div");
+
+message.className =
+"message player";
+
+message.innerHTML =
+
+'<div class="name">You</div>' +
+
+text;
+
+document
+.getElementById("messages")
+.appendChild(message);
+
+}
+
+
+/* -------------------------
+SEND ANSWER
+------------------------- */
+
+function sendAnswer() {
+
+const input =
+document.getElementById("answer");
+
+const text =
+input.value.trim();
+
+if (!text) return;
+
+addPlayerMessage(text);
+
+input.value = "";
+
+
+const current =
+conversation[step];
+
+const lower =
+text.toLowerCase();
+
+
+const correct =
+current.keywords.some(
+keyword =>
+lower.includes(keyword)
+);
+
+
+if (correct) {
+
+xp += 20;
+
+coins += 5;
+
+document
+.getElementById("feedback")
+.innerHTML =
+
+'<div class="feedback">' +
+
+"⭐ <strong>+20 XP</strong><br><br>" +
+
+"✓ Great communication!<br>" +
+
+current.feedback +
+
+"</div>";
+
+
+setTimeout(() => {
+
+step++;
+
+
+if (
+step <
+conversation.length
+) {
+
+document
+.getElementById("feedback")
+.innerHTML = "";
+
+addAIMessage(
+conversation[step].text
+);
+
+}
+
+else {
+
+completeMission();
+
+}
+
+}, 900);
+
+}
+
+else {
+
+hearts--;
+
+xp += 5;
+
+
+document
+.getElementById("feedback")
+.innerHTML =
+
+'<div class="hint">' +
+
+"💡 You're close! Try answering naturally. " +
+
+"Don't worry about being perfect. " +
+
+"<strong>+5 XP for trying.</strong>" +
+
+"</div>";
+
+
+if (hearts <= 0) {
+
+hearts = 3;
+
+document
+.getElementById("feedback")
+.innerHTML +=
+
+'<div class="feedback">' +
+
+"❤️ Your hearts are refilled. " +
+
+"Mistakes are part of learning!" +
+
+"</div>";
+
+}
+
+}
+
+
+updateStats();
+
+}
+
+
+/* -------------------------
+HINT
+------------------------- */
+
+function giveHint() {
+
+if (coins < 5) {
+
+alert(
+"You need 5 coins for a hint."
+);
+
+return;
+
+}
+
+coins -= 5;
+
+
+const hints = [
+
+'Try: "Yes, I have a reservation."',
+
+'Tell Maya the name on the reservation.',
+
+'You can ask about breakfast, the elevator, or simply say no thanks.'
+
+];
+
+
+document
+.getElementById("feedback")
+.innerHTML =
+
+'<div class="hint">' +
+
+"💡 <strong>Hint:</strong><br>" +
+
+hints[step] +
+
+"</div>";
+
+
+updateStats();
+
+}
+
+
+/* -------------------------
+MISSION COMPLETE
+------------------------- */
+
+function completeMission() {
+
+xp += 40;
+
+coins += 10;
+
+updateStats();
+
+showScreen("complete");
+
+}
+
+
+/* -------------------------
+RETURN HOME
+------------------------- */
+
+function goHome() {
+
+showScreen("home");
+
+}
+
+
+</script>
 
 </body>
+
 </html>
