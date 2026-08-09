@@ -49,7 +49,11 @@ Return ONLY valid JSON in this exact structure:
 Learner message:
 ${message}
 `;
-
+if (!process.env.OPENAI_API_KEY) {
+  return res.status(500).json({
+    error: "OPENAI_API_KEY is missing from Vercel"
+  });
+}
     const response = await fetch(
       "https://api.openai.com/v1/responses",
       {
