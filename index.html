@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lingua Quest</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #101522;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 520px;
+      margin: auto;
+      padding: 20px 16px 40px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .stats {
+      display: flex;
+      gap: 7px;
+    }
+
+    .stat {
+      background: #1c2537;
+      padding: 8px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #6747e8, #9a70ff);
+      padding: 25px;
+      border-radius: 24px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: #eeeeff;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: #1b2335;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .card h2 {
+      margin-bottom: 8px;
+    }
+
+    .mission {
+      background: #232d43;
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 12px;
+    }
+
+    .mission-icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .mission h3 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .mission p {
+      color: #aeb8cc;
+      line-height: 1.4;
+    }
+
+    .reward {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 15px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 14px;
+      background: #7c5cff;
+      color: white;
+    }
+
+    button:active {
+      transform: scale(.98);
+    }
+
+    .locked {
+      opacity: .45;
+    }
+
+    .footer {
+      text-align: center;
+      color: #77839a;
+      font-size: 13px;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <div class="header">
+
+      <div class="logo">
+        🌎 Lingua Quest
+      </div>
+
+      <div class="stats">
+        <div class="stat">⭐ 0</div>
+        <div class="stat">🪙 50</div>
+        <div class="stat">❤️ 3</div>
+      </div>
+
+    </div>
+
+
+    <div class="hero">
+
+      <h1>Welcome, Adventurer!</h1>
+
+      <p>
+        Learn a language by living it.
+        Complete missions, meet characters,
+        and build your skills through real conversations.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>🗺️ Madrid Adventure</h2>
+
+      <p>
+        Spanish • Beginner
+      </p>
+
+
+      <div class="mission">
+
+        <div class="mission-icon">
+          🏨
+        </div>
+
+        <h3>
+          Mission 1: Check Into the Hotel
+        </h3>
+
+        <p>
+          You've just arrived in Madrid.
+          Your first challenge is waiting at the Hotel Sol.
+        </p>
+
+        <div class="reward">
+          ⭐ +100 XP &nbsp; 🪙 +25 coins
+        </div>
+
+        <button onclick="startMission()">
+          Start Mission →
+        </button>
+
+      </div>
+
+
+      <div class="mission locked">
+
+        <div class="mission-icon">
+          🍽️
+        </div>
+
+        <h3>
+          Mission 2: Order Dinner
+        </h3>
+
+        <p>
+          🔒 Complete Mission 1 to unlock
+        </p>
+
+      </div>
+
+
+      <div class="mission locked">
+
+        <div class="mission-icon">
+          🚕
+        </div>
+
+        <h3>
+          Mission 3: Catch a Taxi
+        </h3>
+
+        <p>
+          🔒 Complete Mission 2 to unlock
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer">
+      Lingua Quest • Learn by living the language 🌎
+    </div>
+
+  </div>
+
+
+  <script>
+
+    function startMission() {
+
+      alert(
+        "🏨 Mission 1 starting!\n\n" +
+        "Your AI tutor Maya will meet you at the hotel."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
