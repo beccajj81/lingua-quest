@@ -1,1027 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lingua Quest</title>
-
 <style>
-
 * {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
+  box-sizing: border-box;
 }
-
 body {
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-sans-serif;
-
-background:
-linear-gradient(
-145deg,
-#0d1220,
-#19243b
-);
-
-color: white;
-
-min-height: 100vh;
+  margin: 0;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(160deg, #101827, #172a46);
+  color: white;
 }
-
 .app {
-max-width: 520px;
-margin: auto;
-padding: 18px 16px 40px;
+  max-width: 620px;
+  margin: auto;
+  padding: 20px;
 }
-
-.header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 18px;
-}
-
-.logo {
-font-size: 21px;
-font-weight: 800;
-}
-
-.stats {
-display: flex;
-gap: 6px;
-}
-
-.stat {
-background: #1d2638;
-padding: 7px 9px;
-border-radius: 20px;
-font-size: 12px;
-}
-
 .screen {
-display: none;
+  display: none;
+  min-height: 90vh;
+  flex-direction: column;
+  justify-content: center;
 }
-
 .screen.active {
-display: block;
+  display: flex;
 }
-
 .hero {
-background:
-linear-gradient(
-135deg,
-#6547e8,
-#9b70ff
-);
-
-padding: 25px;
-
-border-radius: 24px;
-
-margin-bottom: 16px;
+  text-align: center;
+  margin-bottom: 20px;
 }
-
-.hero h1 {
-font-size: 30px;
-margin-bottom: 8px;
+.logo {
+  font-size: 52px;
 }
-
-.hero p {
-line-height: 1.5;
-color: #eeeeff;
+h1 {
+  font-size: 34px;
+  margin: 10px 0;
 }
-
+h2 {
+  font-size: 28px;
+  margin: 8px 0;
+}
+p {
+  color: #c9d4e5;
+  line-height: 1.5;
+}
 .card {
-background: #1b2335;
-
-border-radius: 20px;
-
-padding: 18px;
-
-margin-bottom: 14px;
+  background: rgba(255,255,255,.09);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.2);
 }
-
-.card h2 {
-margin-bottom: 12px;
-}
-
-.choice-grid {
-display: grid;
-
-grid-template-columns:
-1fr 1fr;
-
-gap: 10px;
-}
-
-.choice {
-background: #27334a;
-
-padding: 16px;
-
-border-radius: 16px;
-
-border: 2px solid transparent;
-
-cursor: pointer;
-
-font-weight: 650;
-}
-
-.choice.selected {
-border-color: #8c73ff;
-
-background: #352d63;
-}
-
 button {
-width: 100%;
-
-border: none;
-
-border-radius: 15px;
-
-padding: 15px;
-
-font-size: 16px;
-
-font-weight: 700;
-
-cursor: pointer;
-
-margin-top: 12px;
-
-background: #7c5cff;
-
-color: white;
+  width: 100%;
+  border: 0;
+  border-radius: 16px;
+  padding: 15px 20px;
+  margin-top: 14px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #7c5cff;
+  color: white;
 }
-
-button.secondary {
-background: #29344b;
+.choice {
+  background: rgba(255,255,255,.08);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 16px;
+  margin: 10px 0;
+  font-size: 17px;
 }
-
-.mission {
-background: #232d43;
-
-padding: 18px;
-
-border-radius: 18px;
-
-margin-top: 12px;
+.choice.selected {
+  border-color: #8f7cff;
+  background: rgba(124,92,255,.2);
 }
-
-.icon {
-font-size: 38px;
-
-margin-bottom: 8px;
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+  margin: 16px 0;
 }
-
-.mission h3 {
-font-size: 20px;
-
-margin-bottom: 6px;
+.stat {
+  background: rgba(255,255,255,.08);
+  border-radius: 15px;
+  padding: 12px;
+  text-align: center;
 }
-
-.mission p {
-color: #aeb8cc;
-
-line-height: 1.5;
+.stat strong {
+  display: block;
+  font-size: 22px;
 }
-
-.locked {
-opacity: .4;
-}
-
 .chat {
-background: #1b2335;
-
-border-radius: 20px;
-
-padding: 15px;
-
-min-height: 450px;
-
-display: flex;
-
-flex-direction: column;
+  height: 330px;
+  overflow: auto;
+  background: rgba(0,0,0,.15);
+  border-radius: 18px;
+  padding: 14px;
 }
-
-.messages {
-flex: 1;
-
-overflow-y: auto;
-
-margin-bottom: 10px;
-}
-
 .message {
-padding: 12px 14px;
-
-border-radius: 16px;
-
-margin: 9px 0;
-
-line-height: 1.45;
-
-max-width: 88%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  margin: 10px 0;
+  max-width: 88%;
+  line-height: 1.4;
 }
-
 .ai {
-background: #29344b;
+  background: rgba(255,255,255,.1);
 }
-
 .player {
-background: #513bb2;
-
-margin-left: auto;
+  background: #6d55e8;
+  margin-left: auto;
 }
-
 .name {
-font-size: 12px;
-
-font-weight: 700;
-
-margin-bottom: 4px;
-
-opacity: .7;
+  font-size: 12px;
+  font-weight: 800;
+  opacity: .75;
+  margin-bottom: 5px;
 }
-
-.input-row {
-display: flex;
-
-gap: 8px;
+.row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
 }
-
-input {
-flex: 1;
-
-background: #0d1320;
-
-border: 1px solid #39445b;
-
-color: white;
-
-border-radius: 14px;
-
-padding: 14px;
-
-font-size: 16px;
-
-outline: none;
+.row input {
+  flex: 1;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 16px;
 }
-
-.input-row button {
-width: auto;
-
-margin-top: 0;
-
-padding: 12px 16px;
+.row button {
+  width: auto;
+  margin: 0;
 }
-
 .feedback {
-background: #173b2a;
-
-border: 1px solid #2d9d61;
-
-border-radius: 14px;
-
-padding: 12px;
-
-margin: 10px 0;
-
-font-size: 14px;
-
-line-height: 1.5;
+  margin-top: 12px;
+  background: rgba(124,92,255,.15);
+  border-radius: 14px;
+  padding: 13px;
 }
-
-.hint {
-background: #3b321b;
-
-border: 1px solid #806b2b;
-
-border-radius: 14px;
-
-padding: 12px;
-
-margin: 10px 0;
-
-font-size: 14px;
-
-line-height: 1.5;
-}
-
-.complete {
-text-align: center;
-
-padding: 28px 15px;
-}
-
-.big {
-font-size: 60px;
-
-margin-bottom: 10px;
-}
-
-.footer {
-text-align: center;
-
-color: #77839a;
-
-font-size: 13px;
-
-margin-top: 25px;
-}
-
 </style>
-
 </head>
-
 <body>
-
 <div class="app">
-
-
-<!-- HEADER -->
-
-<div class="header">
-
-<div class="logo">
-🌎 Lingua Quest
-</div>
-
-<div class="stats">
-
-<div class="stat">
-⭐ <span id="xp">0</span>
-</div>
-
-<div class="stat">
-🪙 <span id="coins">50</span>
-</div>
-
-<div class="stat">
-❤️ <span id="hearts">3</span>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- STEP 1 -->
-
-<section
-id="welcome"
-class="screen active"
->
-
+<!-- WELCOME -->
+<section id="welcome" class="screen active">
 <div class="hero">
-
-<h1>
-🌎 Welcome to Lingua Quest
-</h1>
-
+<div class="logo">🌎</div>
+<h1>Lingua Quest</h1>
 <p>
-
-Don't study a language.
-
-<strong>Live it.</strong>
-
-Your adventure begins with
-real conversations, real situations,
-and a little courage.
-
+Learn a language by living the story,
+not memorizing a worksheet.
 </p>
-
 </div>
-
 <div class="card">
-
-<h2>
-What language do you want to learn?
-</h2>
-
-<div
-class="choice-grid"
-id="languageChoices"
->
-
+<h2>Your adventure starts here.</h2>
+<p>
+Choose a language, tell us why you're learning,
+and meet your tutor.
+</p>
+<button onclick="nextSetup()">
+Start Adventure →
+</button>
+</div>
+</section>
+<!-- LANGUAGE -->
+<section id="language" class="screen">
+<div class="hero">
+<h1>🌍 Choose your language</h1>
+<p>
+Which language are you ready to explore?
+</p>
+</div>
+<div class="card">
 <div
 class="choice selected"
 onclick="chooseLanguage(this,'Spanish')"
 >
 🇪🇸 Spanish
 </div>
-
 <div
 class="choice"
 onclick="chooseLanguage(this,'French')"
 >
 🇫🇷 French
 </div>
-
 <div
 class="choice"
 onclick="chooseLanguage(this,'Italian')"
 >
 🇮🇹 Italian
 </div>
-
 <div
 class="choice"
 onclick="chooseLanguage(this,'German')"
 >
 🇩🇪 German
 </div>
-
-</div>
-
 <button onclick="nextSetup()">
-
 Continue →
-
 </button>
-
 </div>
-
 </section>
-
-
-<!-- STEP 2 -->
-
-<section
-id="goal"
-class="screen"
->
-
+<!-- GOAL -->
+<section id="goal" class="screen">
 <div class="hero">
-
-<h1>
-🎯 What's your mission?
-</h1>
-
+<h1>🎯 What's your mission?</h1>
 <p>
 Tell us why you want to learn.
 We'll use it to shape your adventure.
 </p>
-
 </div>
-
 <div class="card">
-
 <div
 class="choice selected"
 onclick="chooseGoal(this,'Travel')"
 >
 ✈️ Travel
 </div>
-
 <div
 class="choice"
 onclick="chooseGoal(this,'Work')"
 >
 💼 Work
 </div>
-
 <div
 class="choice"
 onclick="chooseGoal(this,'Moving abroad')"
 >
 🏠 Moving abroad
 </div>
-
 <div
 class="choice"
 onclick="chooseGoal(this,'Relationships')"
 >
 ❤️ Relationships & social life
 </div>
-
 <div
 class="choice"
 onclick="chooseGoal(this,'Everyday conversation')"
 >
 🗣️ Everyday conversation
 </div>
-
 <div
 class="choice"
 onclick="chooseGoal(this,'Personal interest')"
 >
 🎓 Personal interest
 </div>
-
-<button onclick="alert('BUTTON WORKS')">
-
+<button onclick="nextSetup()">
 Continue →
-
 </button>
-
 </div>
-
 </section>
-
-
-<!-- STEP 3 -->
-
-<section
-id="level"
-class="screen"
->
-
+<!-- LEVEL -->
+<section id="level" class="screen">
 <div class="hero">
-
-<h1>
-🌱 Where are you starting?
-</h1>
-
+<h1>📈 What's your level?</h1>
 <p>
-No judgment. Everyone starts somewhere.
+No judgment. We'll meet you where you are.
 </p>
-
 </div>
-
 <div class="card">
-
 <div
 class="choice selected"
 onclick="chooseLevel(this,'Beginner')"
 >
 🌱 Beginner
-<br>
-<small>I know a few words or almost nothing.</small>
 </div>
-
 <div
 class="choice"
 onclick="chooseLevel(this,'Intermediate')"
 >
-🌿 Intermediate
-<br>
-<small>I can have basic conversations.</small>
+🚀 Intermediate
 </div>
-
 <div
 class="choice"
 onclick="chooseLevel(this,'Advanced')"
 >
-🔥 Advanced
-<br>
-<small>I can communicate comfortably.</small>
+🏆 Advanced
 </div>
-
 <button onclick="nextSetup()">
-
 Continue →
-
 </button>
-
 </div>
-
 </section>
-
-
-<!-- STEP 4 -->
-
-<section
-id="tutor"
-class="screen"
->
-
+<!-- TUTOR -->
+<section id="tutor" class="screen">
 <div class="hero">
-
-<h1>
-🎭 Choose your guide
-</h1>
-
+<h1>🤖 Meet your tutor</h1>
 <p>
-Your tutor will travel through the adventure with you.
+Pick a personality for your guide.
 </p>
-
 </div>
-
 <div class="card">
-
 <div
 class="choice selected"
 onclick="chooseTutor(this,'Maya')"
 >
-
-🌎 <strong>Maya</strong>
-
-<br>
-
-<small>
-Warm, encouraging & adventurous
-</small>
-
+🌎 Maya · Friendly & encouraging
 </div>
-
 <div
 class="choice"
 onclick="chooseTutor(this,'Alex')"
 >
-
-😏 <strong>Alex</strong>
-
-<br>
-
-<small>
-Funny, playful & confident
-</small>
-
+😏 Alex · Funny & sarcastic
 </div>
-
 <div
 class="choice"
 onclick="chooseTutor(this,'Sofia')"
 >
-
-📚 <strong>Sofia</strong>
-
-<br>
-
-<small>
-Patient, thoughtful & supportive
-</small>
-
+📚 Sofia · Patient teacher
 </div>
-
 <div
 class="choice"
 onclick="chooseTutor(this,'Leo')"
 >
-
-🔥 <strong>Leo</strong>
-
-<br>
-
-<small>
-Energetic, challenging & motivating
-</small>
-
+🔥 Leo · Energetic coach
 </div>
-
 <button onclick="createAdventure()">
-
-Create My Adventure →
-
+Enter Lingua Quest →
 </button>
-
 </div>
-
 </section>
-
-
-<!-- ADVENTURE MAP -->
-
-<section
-id="home"
-class="screen"
->
-
+<!-- HOME -->
+<section id="home" class="screen">
 <div class="hero">
-
-<h1>
-Welcome, <span id="playerName">Adventurer</span>!
-</h1>
-
-<p id="adventureDescription">
-
-Your adventure begins now.
-
-</p>
-
+<div class="logo">🗺️</div>
+<h1>Welcome to your adventure</h1>
+<p id="adventureDescription"></p>
 </div>
-
-
+<div class="stats">
+<div class="stat">
+⭐
+<strong id="xp">0</strong>
+XP
+</div>
+<div class="stat">
+🪙
+<strong id="coins">50</strong>
+Coins
+</div>
+<div class="stat">
+❤️
+<strong id="hearts">5</strong>
+Hearts
+</div>
+</div>
 <div class="card">
-
-<h2>
-🗺️ Your Adventure
-</h2>
-
-<p id="profileSummary">
-
-</p>
-
-
-<div class="mission">
-
-<div class="icon">
-🏨
-</div>
-
-<h3>
-Mission 1: Check Into the Hotel
-</h3>
-
+<p id="profileSummary"></p>
+<h2>🏨 Madrid Hotel</h2>
 <p>
-
-You've just arrived in Madrid.
-
-Your first challenge is waiting
-at the Hotel Sol.
-
+Your first mission: check into the hotel,
+ask about breakfast, and find the elevator.
 </p>
-
-<button
-onclick="startMission()"
->
-
+<button onclick="startMission()">
 Start Mission →
-
 </button>
-
 </div>
-
-
-<div class="mission locked">
-
-<div class="icon">
-🍽️
-</div>
-
-<h3>
-Mission 2: Order Dinner
-</h3>
-
-<p>
-🔒 Complete Mission 1 to unlock
-</p>
-
-</div>
-
-
-<div class="mission locked">
-
-<div class="icon">
-🚕
-</div>
-
-<h3>
-Mission 3: Catch a Taxi
-</h3>
-
-<p>
-🔒 Complete Mission 2 to unlock
-</p>
-
-</div>
-
-</div>
-
 </section>
-
-
-<!-- HOTEL MISSION -->
-
-<section
-id="mission"
-class="screen"
->
-
-<div class="card">
-
-<h2>
-🇪🇸 Madrid • Day 1
-</h2>
-
+<!-- MISSION -->
+<section id="mission" class="screen">
+<div class="hero">
+<h2>🏨 Hotel Check-In</h2>
 <p>
-
-🏨 <strong>
-Mission: Check Into the Hotel
-</strong>
-
+Talk naturally. Mistakes are part of the game.
 </p>
-
-<p
-style="margin-top:8px;color:#aeb8cc"
->
-
-You've just arrived after a long flight.
-
-Walk into Hotel Sol and check in.
-
-</p>
-
 </div>
-
-
-<div class="chat">
-
+<div class="stats">
+<div class="stat">
+⭐
+<strong id="missionXp">0</strong>
+XP
+</div>
+<div class="stat">
+🪙
+<strong id="missionCoins">50</strong>
+Coins
+</div>
+<div class="stat">
+❤️
+<strong id="missionHearts">5</strong>
+Hearts
+</div>
+</div>
 <div
 id="messages"
-class="messages"
+class="chat"
 >
 </div>
-
-<div id="feedback">
-</div>
-
-<div class="input-row">
+<div class="row">
 
 <input
-id="answer"
-placeholder="Type what you'd naturally say..."
->
+id=“answer”
+placeholder=“Type your response…”
+autocomplete=“off”
 
-<button
-onclick="sendAnswer()"
->
+<button onclick="sendAnswer()">
 Send
 </button>
-
 </div>
-
-<button
-class="secondary"
-onclick="giveHint()"
->
-
-💡 Give me a hint (-5 🪙)
-
+<button onclick="giveHint()">
+💡 Hint
 </button>
-
-</div>
-
+<div id="feedback"></div>
 </section>
-
-
-<!-- COMPLETE -->
-
-<section
-id="complete"
-class="screen"
->
-
-<div class="card complete">
-
-<div class="big">
-🎉
 </div>
-
-<h1>
-Mission Complete!
-</h1>
-
-<p style="margin-top:12px">
-
-You successfully checked into
-Hotel Sol.
-
-</p>
-
-<h2 style="margin-top:20px">
-
-⭐ +100 XP
-
-</h2>
-
-<p style="margin-top:8px">
-
-🪙 +25 coins
-
-</p>
-
-<button onclick="goHome()">
-
-Return to Adventure Map →
-
-</button>
-
-</div>
-
-</section>
-
-
-</div>
-
-
 <script>
-
-
-/* PROFILE */
-
 let language = "Spanish";
-
 let goal = "Travel";
-
 let level = "Beginner";
-
 let tutor = "Maya";
-
-
-/* GAME */
-
 let xp = 0;
-
 let coins = 50;
-
-let hearts = 3;
-
-let step = 0;
-
-
-/* LANGUAGE */
-
-function chooseLanguage(element,value) {
-
-language = value;
-
-document
-.querySelectorAll("#languageChoices .choice")
-.forEach(x =>
-x.classList.remove("selected")
-);
-
-element.classList.add("selected");
-
-}
-
-
-/* GOAL */
-
-function chooseGoal(element,value) {
-
-goal = value;
-
-document
-.querySelectorAll("#goal .choice")
-.forEach(x =>
-x.classList.remove("selected")
-);
-
-element.classList.add("selected");
-
-}
-
-
-/* LEVEL */
-
-function chooseLevel(element,value) {
-
-level = value;
-
-document
-.querySelectorAll("#level .choice")
-.forEach(x =>
-x.classList.remove("selected")
-);
-
-element.classList.add("selected");
-
-}
-
-
-/* TUTOR */
-
-function chooseTutor(element,value) {
-
-tutor = value;
-
-document
-.querySelectorAll("#tutor .choice")
-.forEach(x =>
-x.classList.remove("selected")
-);
-
-element.classList.add("selected");
-
-}
-
-
-/* SCREEN */
-
+let hearts = 5;
 function showScreen(id) {
-
 document
 .querySelectorAll(".screen")
-.forEach(screen =>
-screen.classList.remove("active")
-);
-
-document
-.getElementById(id)
-.classList.add("active");
-
+.forEach(function(screen) {
+screen.classList.remove("active");
+});
+const screen =
+document.getElementById(id);
+if (screen) {
+screen.classList.add("active");
 }
-
-
-/* SETUP NAVIGATION */
-
+}
 function nextSetup() {
-  
-  
-
 const screens = [
 "welcome",
 "language",
@@ -1029,47 +439,76 @@ const screens = [
 "level",
 "tutor"
 ];
-
 const current =
-document
-.querySelector(".screen.active")
-.id;
-
-const index =
-screens.indexOf(current);
-
-if (index === -1) {
-console.error("Current screen not found:", current);
+document.querySelector(".screen.active");
+if (!current) {
 return;
 }
-
-if (index < screens.length - 1) {
-
-alert("Moving to: " + screens[index + 1]);
-showScreen(screens[index + 1]);
-} else {
-
-createAdventure();
-
-
-
+const index =
+screens.indexOf(current.id);
+if (
+index >= 0 &&
+index < screens.length - 1
+) {
+showScreen(
+screens[index + 1]
+);
 }
-
-
-
-
-
-
-
-
-/* CREATE ADVENTURE */
-
+}
+function chooseLanguage(
+element,
+value
+) {
+language = value;
+element.parentElement
+.querySelectorAll(".choice")
+.forEach(function(choice) {
+choice.classList.remove("selected");
+});
+element.classList.add("selected");
+}
+function chooseGoal(
+element,
+value
+) {
+goal = value;
+element.parentElement
+.querySelectorAll(".choice")
+.forEach(function(choice) {
+choice.classList.remove("selected");
+});
+element.classList.add("selected");
+}
+function chooseLevel(
+element,
+value
+) {
+level = value;
+element.parentElement
+.querySelectorAll(".choice")
+.forEach(function(choice) {
+choice.classList.remove("selected");
+});
+element.classList.add("selected");
+}
+function chooseTutor(
+element,
+value
+) {
+tutor = value;
+element.parentElement
+.querySelectorAll(".choice")
+.forEach(function(choice) {
+choice.classList.remove("selected");
+});
+element.classList.add("selected");
+}
 function createAdventure() {
-
 document
-.getElementById("adventureDescription")
+.getElementById(
+"adventureDescription"
+)
 .textContent =
-
 "You're learning " +
 language +
 " for " +
@@ -1077,11 +516,11 @@ goal.toLowerCase() +
 ". " +
 tutor +
 " will be your guide.";
-
 document
-.getElementById("profileSummary")
+.getElementById(
+"profileSummary"
+)
 .textContent =
-
 language +
 " • " +
 level +
@@ -1089,360 +528,161 @@ level +
 goal +
 " • Guide: " +
 tutor;
-
+updateStats();
 showScreen("home");
-
 }
-
-
-/* STATS */
-
 function updateStats() {
-
 document
 .getElementById("xp")
 .textContent = xp;
-
 document
 .getElementById("coins")
 .textContent = coins;
-
 document
 .getElementById("hearts")
 .textContent = hearts;
-
+document
+.getElementById("missionXp")
+.textContent = xp;
+document
+.getElementById("missionCoins")
+.textContent = coins;
+document
+.getElementById("missionHearts")
+.textContent = hearts;
 }
-
-
-/* START MISSION */
-
 function startMission() {
-
-step = 0;
-
 document
 .getElementById("messages")
 .innerHTML = "";
-
 document
 .getElementById("feedback")
 .innerHTML = "";
-
 showScreen("mission");
-
 addAIMessage(
 "¡Hola! Bienvenida al Hotel Sol. ¿Tiene una reserva?"
 );
-
-document
-.getElementById("answer")
-.focus();
-
 }
-
-
-/* AI MESSAGE */
-
 function addAIMessage(text) {
-
 const message =
 document.createElement("div");
-
 message.className =
 "message ai";
-
 message.innerHTML =
-
-'<div class="name">🌎 ' +
+"<div class='name'>🌎 " +
 tutor +
-'</div>' +
+"</div>" +
 text;
-
 document
 .getElementById("messages")
 .appendChild(message);
-
 }
-
-
-/* PLAYER */
-
 function addPlayerMessage(text) {
-
 const message =
 document.createElement("div");
-
 message.className =
 "message player";
-
 message.innerHTML =
-
-'<div class="name">You</div>' +
+"<div class='name'>You</div>" +
 text;
-
 document
 .getElementById("messages")
 .appendChild(message);
-
 }
-
-
-/* CONVERSATION */
-
-const conversation = [
-
-{
-
-keywords:
-[
-"yes",
-"reservation",
-"booking",
-"reserve",
-"have"
-],
-
-feedback:
-"Great! You communicated that you have a reservation.",
-
-next:
-"¡Perfecto! ¿A nombre de quién?"
-
-},
-
-{
-
-keywords:
-[
-"rebecca",
-"name",
-"my name",
-"under"
-],
-
-feedback:
-"Nice! You gave the name on the reservation.",
-
-next:
-"Gracias, Rebecca. Aquí está su llave. ¿Necesita algo más?"
-
-},
-
-{
-
-keywords:
-[
-"breakfast",
-"elevator",
-"where",
-"yes",
-"no"
-],
-
-feedback:
-"Excellent! You handled the final hotel question.",
-
-next:
-"¡Excelente! Disfrute su estancia."
-
-}
-
-];
-
-
-/* SEND */
-
 async function sendAnswer() {
-
-  const input = document.getElementById("answer");
-  const text = input.value.trim();
-
-  if (!text) return;
-
-  addPlayerMessage(text);
-  input.value = "";
-
-  const feedback = document.getElementById("feedback");
-
-  feedback.innerHTML =
-    '<div class="hint">🤖 Maya is thinking...</div>';
-
-  try {
-
-    const response = await fetch("/api/chat", {
-
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json"
-      },
-
-      body: JSON.stringify({
-
-        message: text,
-
-        language: language,
-
-        level: level,
-
-        tutor: tutor,
-
-        mission: "Hotel Check-In"
-
-      })
-
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "AI request failed");
-    }
-
-    addAIMessage(data.reply);
-
-    xp += Number(data.xp) || 10;
-
-    if (data.vocabulary &&
-        data.vocabulary.length > 0) {
-
-      feedback.innerHTML =
-
-        '<div class="feedback">' +
-
-        "⭐ <strong>+" +
-        (Number(data.xp) || 10) +
-        " XP</strong><br><br>" +
-
-        "🧠 Vocabulary: " +
-        data.vocabulary.join(", ") +
-
-        "</div>";
-
-    } else if (data.correction) {
-
-      feedback.innerHTML =
-
-        '<div class="feedback">' +
-
-        "⭐ <strong>+" +
-        (Number(data.xp) || 10) +
-        " XP</strong><br><br>" +
-
-        "💬 <strong>Correction:</strong><br>" +
-
-        data.correction +
-
-        "<br><br>" +
-
-        data.explanation +
-
-        "</div>";
-
-    } else {
-
-      feedback.innerHTML =
-
-        '<div class="feedback">' +
-
-        "⭐ <strong>+" +
-        (Number(data.xp) || 10) +
-        " XP</strong><br><br>" +
-
-        "Great job keeping the conversation going! 🌎" +
-
-        "</div>";
-
-    }
-
-    updateStats();
-
-  } catch (error) {
-
-    console.error(error);
-
-    feedback.innerHTML =
-
-      '<div class="hint">' +
-
-      "⚠️ Maya couldn't connect right now. " +
-
-      "Please try again." +
-
-      "</div>";
-
-  }
-
-}
-/* HINT */
-
-function giveHint() {
-
-if(coins < 5) {
-
-alert(
-"You need 5 coins for a hint."
-);
-
+const input =
+document.getElementById("answer");
+const text =
+input.value.trim();
+if (!text) {
 return;
-
 }
-
-coins -= 5;
-
-const hints = [
-
-'Try: "Yes, I have a reservation."',
-
-'Tell Maya the name on the reservation.',
-
-'Ask about breakfast, the elevator, or say no thanks.'
-
-];
-
+addPlayerMessage(text);
+input.value = "";
 document
 .getElementById("feedback")
 .innerHTML =
-
-'<div class="hint">' +
-
-"💡 <strong>Hint:</strong><br>" +
-
-hints[step] +
-
+"<div class='feedback'>🤖 " +
+tutor +
+" is thinking...</div>";
+try {
+const response =
+await fetch(
+"/api/chat",
+{
+method: "POST",
+headers: {
+"Content-Type":
+"application/json"
+},
+body: JSON.stringify({
+message: text,
+language: language,
+level: level,
+tutor: tutor,
+mission:
+"Hotel Check-In"
+})
+}
+);
+const data =
+await response.json();
+if (!response.ok) {
+throw new Error(
+data.error ||
+"AI request failed"
+);
+}
+addAIMessage(
+data.reply ||
+"¡Muy bien! Continuemos."
+);
+const gained =
+Number(data.xp) || 10;
+xp += gained;
+coins += 5;
+updateStats();
+let feedback =
+"⭐ <strong>+" +
+gained +
+" XP</strong>";
+if (data.correction) {
+feedback +=
+"<br><br>💬 <strong>Correction:</strong><br>" +
+data.correction;
+}
+if (data.explanation) {
+feedback +=
+"<br><br>" +
+data.explanation;
+}
+document
+.getElementById("feedback")
+.innerHTML =
+"<div class='feedback'>" +
+feedback +
 "</div>";
-
-updateStats();
-
 }
-
-
-/* COMPLETE */
-
-function completeMission() {
-
-xp += 40;
-
-coins += 10;
-
-updateStats();
-
-showScreen("complete");
-
+catch (error) {
+console.error(error);
+document
+.getElementById("feedback")
+.innerHTML =
+"<div class='feedback'>" +
+"⚠️ Maya couldn't connect right now. " +
+"Your game is still working. Try again." +
+"</div>";
 }
-
-
-/* HOME */
-
-function goHome() {
-
-showScreen("home");
-
 }
-
-
+function giveHint() {
+document
+.getElementById("feedback")
+.innerHTML =
+"<div class='feedback'>" +
+"💡 Hint: Try saying " +
+"<strong>“Sí, tengo una reserva.”</strong>" +
+"</div>";
+}
 </script>
-
 </body>
-
 </html>
