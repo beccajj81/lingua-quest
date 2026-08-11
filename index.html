@@ -366,51 +366,67 @@ Start Mission →
 </section>
 <!-- MISSION -->
 <section id="mission" class="screen">
+
 <div class="hero">
+
 <h2>🏨 Hotel Check-In</h2>
+
 <p>
 Talk naturally. Mistakes are part of the game.
 </p>
+
 </div>
+
 <div class="stats">
+
 <div class="stat">
 ⭐
 <strong id="missionXp">0</strong>
 XP
 </div>
+
 <div class="stat">
 🪙
 <strong id="missionCoins">50</strong>
 Coins
 </div>
+
 <div class="stat">
 ❤️
 <strong id="missionHearts">5</strong>
 Hearts
 </div>
+
 </div>
+
 <div
 id="messages"
 class="chat"
 >
 </div>
+
 <div class="row">
 
 <input
-id=“answer”
-placeholder=“Type your response…”
-autocomplete=“off”
+id="answer"
+placeholder="Type your response..."
+autocomplete="off"
+>
 
-<button onclick="alert('SEND BUTTON WORKS')">
+<button onclick="sendAnswer()">
 Send
 </button>
 
 </div>
+
 <button onclick="giveHint()">
 💡 Hint
 </button>
+
 <div id="feedback"></div>
+
 </section>
+
 </div>
 <script>
 let language = "Spanish";
